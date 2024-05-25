@@ -1,25 +1,22 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Features
 
-Things you may want to cover:
+- CSV Uploader
+- Listing View for Movies and Reviews
 
-* Ruby version
 
-* System dependencies
 
-* Configuration
+## Technical Description
 
-* Database creation
+- what's implemented now that we have independent CSV uploader
+- First we check for CSV files to be matching the structure shared
+- Then we divide the CSV into chunks before we load file into memory
+- Then we send each chunk into thread with the upload tasks needed
+- we process the file then build chunks to bulk seeded to the database using DB transactions
+- Database used here is PostgreSql
 
-* Database initialization
 
-* How to run the test suite
+## Notes and Further Work
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-# MovieReviewApp
+- Author field is implemented to be array of strings which causes heavy processing in filtering and retrieving
+- the best way to achive this is to build has many relation with review and movie author for better performance
