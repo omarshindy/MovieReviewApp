@@ -1,0 +1,28 @@
+<!-- app/views/movies/show.html.erb -->
+<h1><%= @movie.title %></h1>
+<p><strong>Year:</strong> <%= @movie.year %></p>
+<p><strong>Actors:</strong> <%= @movie.actors.join(', ') %></p>
+<p><strong>Country:</strong> <%= @movie.country %></p>
+<p><strong>Average Rating:</strong> <%= @movie.reviews.average(:stars) %></p>
+
+<h2>Reviews</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Reviewer</th>
+      <th>Stars</th>
+      <th>Review</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @movie.reviews.each do |review| %>
+      <tr>
+        <td><%= review.reviewer %></td>
+        <td><%= review.stars %></td>
+        <td><%= review.review %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Back to Movies', movies_path %>

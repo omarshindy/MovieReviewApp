@@ -1,0 +1,34 @@
+<!-- app/views/csv_imports/new.html.erb -->
+<h1>Import CSV File</h1>
+
+<% if flash[:notice] %>
+  <div class="notice"><%= flash[:notice] %></div>
+<% end %>
+
+<% if flash[:alert] %>
+  <div class="alert"><%= flash[:alert] %></div>
+<% end %>
+
+<h2>Choose the type of CSV file to upload:</h2>
+
+<%= form_with url: import_movies_csv_path, local: true, multipart: true do |form| %>
+  <div>
+    <%= label_tag :csv_file, "Movies CSV File" %>
+    <%= file_field_tag :csv_file %>
+  </div>
+  <%= submit_tag "Upload Movies CSV" %>
+<% end %>
+
+<%= form_with url: import_reviews_csv_path, local: true, multipart: true do |form| %>
+  <div>
+    <%= label_tag :csv_file, "Reviews CSV File" %>
+    <%= file_field_tag :csv_file %>
+  </div>
+  <%= submit_tag "Upload Reviews CSV" %>
+<% end %>
+
+<h2>Accepted CSV Structure</h2>
+<%= link_to 'Show Movies CSV Structure', movies_csv_structure_path, class: 'button' %>
+<%= link_to 'Show Reviews CSV Structure', reviews_csv_structure_path, class: 'button' %>
+
+<%= link_to 'Back to Movies', movies_path %>

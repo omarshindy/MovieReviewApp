@@ -1,0 +1,38 @@
+<h1>Movies</h1>
+
+<%= form_with url: movies_path, method: :get, local: true do %>
+  <div>
+    <%= label_tag :search, "Search by Actor:" %>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search" %>
+  </div>
+<% end %>
+
+<div class="import-button">
+  <%= link_to 'Import CSV', import_csv_path, class: 'button' %>
+</div>
+
+<table class="movies-table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Year</th>
+      <th>Actors</th>
+      <th>Average Rating</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @movies.each do |movie| %>
+      <tr>
+        <td><%= movie.title %></td>
+        <td><%= movie.year %></td>
+        <td><%= movie.actors.join(', ') %></td>
+        <td><%= movie.reviews.average(:stars).to_f.round(2) %></td>
+        <td><%= link_to 'View Reviews', movie_path(movie), class: 'button' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @movies %>
